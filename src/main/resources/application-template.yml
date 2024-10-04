@@ -1,0 +1,32 @@
+# =================================
+# = Server
+# =================================
+server:
+   port: 8081
+
+# =================================
+# = Spring
+# =================================
+spring:
+   application:
+      name: userprofile
+   datasource:
+      url: jdbc:postgresql://<YOUR-HOST>/userprofile_db
+      username: admin
+      password: root
+   jpa:
+      hibernate:
+         ddl-auto: update
+      properties:
+         hibernate:
+            dialect: org.hibernate.dialect.PostgreSQLDialect
+   rabbitmq:
+      addresses:
+
+# =================================
+# = RabbitMQ
+# =================================
+broker:
+   queue:
+      notification:
+         name: default.notification
