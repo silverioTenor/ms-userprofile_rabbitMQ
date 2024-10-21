@@ -1,44 +1,36 @@
 package com.ms.userprofile.models;
 
 import jakarta.persistence.*;
+import lombok.*;
 
-import java.io.Serial;
-import java.io.Serializable;
+import java.util.List;
 import java.util.UUID;
 
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 @Entity
 @Table(name = "users")
-public class UserProfileModel implements Serializable {
-    @Serial
-    private static final long serialVersionUID = 1L;
+public class UserProfileModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID userId;
+
     private String name;
+
     private String email;
 
-    public UUID getUserId() {
-        return userId;
-    }
+    private String password;
 
-    public void setUserId(UUID userId) {
-        this.userId = userId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private List<RoleModel> roles;
 }

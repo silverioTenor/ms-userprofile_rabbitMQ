@@ -11,7 +11,7 @@ spring:
    application:
       name: userprofile
    datasource:
-      url: jdbc:postgresql://<YOUR-HOST>/userprofile_db
+      url: jdbc:postgresql://localhost:5432/userprofile_db
       username: admin
       password: root
    jpa:
@@ -21,7 +21,7 @@ spring:
          hibernate:
             dialect: org.hibernate.dialect.PostgreSQLDialect
    rabbitmq:
-      addresses:
+      addresses: amqps://<YOUR>
 
 # =================================
 # = RabbitMQ
@@ -30,3 +30,14 @@ broker:
    queue:
       notification:
          name: default.notification
+
+# =================================
+# = Auth
+# =================================
+token:
+   jwt:
+      secret: test123
+      issuer: ms-userprofile
+      expiration: 1
+
+timezone: America/Sao_Paulo

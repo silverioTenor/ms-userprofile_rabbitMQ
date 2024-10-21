@@ -1,6 +1,6 @@
 package com.ms.userprofile.producer;
 
-import com.ms.userprofile.dtos.NotificationDto;
+import com.ms.userprofile.dtos.NotificationDTO;
 import com.ms.userprofile.models.UserProfileModel;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,7 +19,7 @@ public class UserProfileProducer {
     private String routingKey;
 
     public void publishMessageNotification(UserProfileModel userProfileModel) {
-        var notificationDto = new NotificationDto();
+        var notificationDto = new NotificationDTO();
         notificationDto.setUserId(userProfileModel.getUserId());
         notificationDto.setEmailTo(userProfileModel.getEmail());
         notificationDto.setSubject("Cadastro realizado com sucesso!");
